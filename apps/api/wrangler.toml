@@ -1,0 +1,29 @@
+name = "financeiro-api"
+main = "src/index.ts"
+compatibility_date = "2024-12-01"
+
+# Cloudflare D1 Database
+[[d1_databases]]
+binding = "DB"
+database_name = "financeiro-db"
+database_id = "ea14c348-d5a8-4536-813b-7bef99f8927c"
+
+# Cloudflare R2 Storage (para faturas)
+[[r2_buckets]]
+binding = "INVOICES"
+bucket_name = "financeiro-invoices"
+preview_bucket_name = "financeiro-invoices-preview"
+
+# AI Binding (para parsing de faturas)
+[ai]
+binding = "AI"
+
+# Variáveis de ambiente
+[vars]
+ENVIRONMENT = "development"
+JWT_SECRET = "dev-secret-change-in-production-use-wrangler-secret-put"
+
+# Secrets de produção (configurar via: wrangler secret put <NAME>)
+# JWT_SECRET (produção)
+# STRIPE_SECRET_KEY
+# STRIPE_WEBHOOK_SECRET

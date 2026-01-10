@@ -1,0 +1,24 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "tail": "wrangler tail",
+    "db:generate": "wrangler d1 execute financeiro-db --local --file=./schema.sql",
+    "db:migrate": "wrangler d1 migrations apply financeiro-db"
+  },
+  "dependencies": {
+    "@financeiro/database": "workspace:*",
+    "@financeiro/types": "workspace:*",
+    "drizzle-orm": "^0.36.4",
+    "hono": "^4.7.10",
+    "nanoid": "^5.0.9"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20241218.0",
+    "wrangler": "^3.101.0",
+    "typescript": "^5.7.2"
+  }
+}
