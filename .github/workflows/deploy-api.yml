@@ -8,7 +8,7 @@ on:
       - 'apps/api/**'
       - 'packages/**'
       - '.github/workflows/deploy-api.yml'
-  workflow_dispatch: # Permite executar manualmente
+  workflow_dispatch:
 
 env:
   CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
@@ -23,16 +23,13 @@ jobs:
       - name: 📥 Checkout código
         uses: actions/checkout@v4
 
-      - name: 📦 Setup pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 9
-
       - name: 🟢 Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'pnpm'
+
+      - name: 📦 Install pnpm
+        run: npm install -g pnpm@9.15.4
 
       - name: 📚 Instalar dependências
         run: pnpm install
@@ -53,4 +50,4 @@ jobs:
           echo "🎉 Deploy concluído!"
           echo "URL: https://financeiro-api.workers.dev"
           sleep 5
-          curl -s https://financeiro-api.workers.dev || echo "API pode demorar alguns segundos para iniciar"
+          curl -s https://financeiro-api.workers.dev || echo "API iniciando..."
